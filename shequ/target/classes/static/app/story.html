@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>社区资讯</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        .title {
+            margin: 20px 15px 10px;
+            color: #6d6d72;
+            font-size: 15px;
+        }
+
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 11px 0;
+            vertical-align: middle;
+        }
+
+        .mui-bar {
+            background-color: white !important;
+        }
+
+        .story {
+            padding-top: 10px;
+            background: #e6e6e6;
+        }
+
+        .story .search {
+            padding: 10px 10px;
+            padding-right: 35px;
+            position: relative;
+        }
+
+        .story .tupian {
+            display: inline-flex;
+            padding: 0px 10px;
+        }
+
+        .story .tupian-item {
+            width: 50%;
+            height: 145px;
+            position: relative;
+            bottom: 10px;
+        }
+
+        .story .tupian-item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play {
+            padding: 5px;
+            background: white;
+        }
+
+        .playing {
+            position: fixed;
+            bottom: 0px;
+            height: 76px;
+            padding-top: 1px;
+            background-color: #ffffff;
+            width: 100%;
+            border-top: solid 1px #eee;
+        }
+
+        .mui-table-view:before {
+            background-color: white !important;
+        }
+
+        .story_tell {
+            margin-bottom: 2px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #FFFFFF;
+            line-height: 20px;
+            position: relative;
+        }
+
+        .story_tell p {
+            font-size: 18px !important;
+            color: black !important;
+        }
+
+        input[type=search] {
+            border: 1px solid #ebebeb;
+            height: 44px;
+            border-radius: 10px;
+            outline: none;
+            background-color: aliceblue;
+        }
+
+        .message {
+            margin: 5px;
+            color: black;
+        }
+
+
+        .msg-item {
+            border-radius: 20px;
+            margin-bottom: 5px;
+        }
+
+        .message p {
+            color: black !important;
+        }
+
+        .message .left {
+            display: flex;
+            padding: 5px;
+        }
+
+        .message .left p {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message .image {
+            width: 15%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .message .image img {
+            width: 60px;
+            border-radius: 50%;
+            height: 60px;
+        }
+
+        .message .chat {
+            width: 85%;
+            height: 100%;
+        }
+
+        .message .right {
+            display: flex;
+        }
+
+        .message .right p {
+            padding: 10px;
+            border-radius: 10px;
+            background: lawngreen;
+        }
+
+        .sendMsg {
+            height: 60px;
+            background: whitesmoke;
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+            bottom: 50px;
+            display: flex;
+            padding: 0px 5px;
+        }
+
+        .sendMsg .send {
+            width: 20%;
+            height: 60px;
+            line-height: 60px;
+            background: whitesmoke;
+        }
+
+        .sendMsg .input {
+            background: whitesmoke;
+            width: 80%;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .mui-table-view .mui-media-object {
+            line-height: 100px;
+            max-width: 100px;
+            height: 80px;
+        }
+
+        .gonggao {
+            background: white;
+            height: 30px;
+            display: flex;
+        }
+
+        .search1 {
+            background: #E8E8E8;
+            padding: 5px;
+        }
+
+        .xingqu {
+            padding: 10px;
+            background: white;
+            margin-bottom: 5px;
+        }
+
+        .contentlist {
+            margin-bottom: 5px;
+            background: white;
+        }
+
+        .contentlist {
+            display: flex;
+        }
+
+        .contentlist-item {
+            padding: 10px;
+        }
+
+        .contentlist-item p {
+            position: relative;
+            top: 6px;
+        }
+
+        #robotContent img {
+            position: relative;
+            top: 5px;
+        }
+
+        .mui-title {
+            color: white !important;
+        }
+
+        .mui-bar-tab .mui-tab-item.mui-active {
+            color: #60C3FA !important;
+        }
+
+        .mui-content {
+            background: #E8E8E8 !important;
+        }
+        .mui-icon{
+            color: white!important;
+        }
+    </style>
+</head>
+
+<body style="background: #E8E8E8">
+
+<header class="mui-bar mui-bar-nav" style="background: #60C3FA!important;">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">听故事</h1>
+</header>
+
+<div class="mui-content" id="app">
+    <div class="story">
+        <div class="search">
+            <input type="search">
+            <img src="images/story/sousuo.png"
+                 style="width: 20px;height: 20px;position: absolute;left: 20px;top: 22px;">
+            <img src="images/story/audio.png"
+                 style="width: 20px;height: 20px;position: absolute;right: 40px;top: 22px;">
+            <img src="images/story/aixin.png"
+                 style="width: 20px;height: 20px;position: absolute;right: 10px;top: 22px;">
+        </div>
+        <div class="tupian">
+            <div class="tupian-item" style="padding-right: 5px">
+                <img src="images/story/pic1.png">
+            </div>
+            <div class="tupian-item" style="padding-left: 5px">
+                <img src="images/story/pic2.png">
+            </div>
+        </div>
+        <div class="tupian">
+            <div class="tupian-item" style="padding-right: 5px">
+                <img src="images/story/pic3.png">
+            </div>
+            <div class="tupian-item" style="padding-left: 5px">
+                <img src="images/story/pic4.png">
+            </div>
+        </div>
+        <div class="play">
+            <ul class="mui-table-view mui-table-view-chevron">
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">海的女儿</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">1</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">精卫填海</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">2</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">大禹治水</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">3</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">精卫填海</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">4</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">小红帽</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">5</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">十万个为什么</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">6</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">白雪公主</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">7</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">虹猫蓝兔三千问</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">8</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">冰雪奇缘</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">9</p>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <div class="story_tell">
+                        <img src="images/story/更多 拷贝 7.png" style="position: absolute;right: -50px;top: 10px;">
+                        <img src="images/story/喜欢(1).png" style="position: absolute;right: -35px;top: 10px;">
+                        <img src="images/story/下载.png" style="position: absolute;right: -10px;top: 8px;">
+                        <p style="position: absolute;left: 50px;top: 8px;">米老鼠和唐老鸭（森林奇遇记）</p>
+                        <p style="position: absolute;left: 10px;top: 8px;">2</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="playing">
+            <img src="images/story/椭圆 2.png" style="position:absolute;top: 10px;left: 15px;">
+            <img src="images/story/播放 拷贝.png" style="position:absolute;right:60px;top: 20px;">
+            <img src="images/story/列表.png" style="position:absolute;right:20px;top: 23px;">
+            <p style="position: absolute;left: 80px;top:20px;line-height: 20px;">米老鼠和唐老鸭（森林奇遇记）</p>
+            <p style="position: absolute;left: 80px;top:40px;line-height: 20px;color: #E8E8E8;">迪士尼合集</p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/mui.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    let user = localStorage.getItem("qianTaiUser")
+    if (user) {
+        user = JSON.parse(user)
+        $("#loginNickName").html(user.nickname)
+        $("#isLogin").show()
+    }
+</script>
+</html>

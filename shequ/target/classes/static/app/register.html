@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>注册页</title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <style type="text/css">
+
+        .mui-btn {
+            width: 100%;
+        }
+
+        .tag {
+            height: 200px;
+            background: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .tag img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        .mui-input-row {
+            height: 60px !important;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">注册</h1>
+</header>
+<div class="mui-content">
+    <div class="tag">
+        <img src="images/muwu.jpg">
+    </div>
+    <form class="mui-input-group">
+        <div class="mui-input-row">
+            <label>账号</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入账号" id="username">
+        </div>
+        <div class="mui-input-row">
+            <label>密码</label>
+            <input type="password" class="mui-input-clear" placeholder="请输入密码" id="password">
+        </div>
+        <div class="mui-input-row">
+            <label>昵称</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入昵称" id="nickname">
+        </div>
+    </form>
+    <div class="mui-content-padded" align="center">
+        <button type="button" class="mui-btn mui-btn-blue" id="reg">注册</button>
+    </div>
+</div>
+<script src="js/mui.min.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+    $("#reg").click(function () {
+        let username = $("#username").val()
+        let password = $("#password").val()
+        let nickname = $("#nickname").val()
+        if (!username) {
+            alert("请输入账号")
+            return
+        }
+        if (!password) {
+            alert("请输入密码")
+            return;
+        }
+        if (!nickname) {
+            alert("请输入昵称")
+            return;
+        }
+        $.post(app.serverUrl + "/t_user/register", {
+            username: username,
+            password: password,
+            nickname: nickname
+        }, function (res) {
+            if (res.code == 0) {
+                alert("注册成功")
+                window.location.href = "login.html"
+            } else {
+                alert(res.msg)
+            }
+        })
+    })
+</script>
+</body>
+</html>

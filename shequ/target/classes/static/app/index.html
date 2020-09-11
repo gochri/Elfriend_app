@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>社区资讯</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        .title {
+            margin: 20px 15px 10px;
+            color: #6d6d72;
+            font-size: 15px;
+        }
+
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 11px 0;
+            vertical-align: middle;
+        }
+
+        .mui-bar {
+            background-color: white !important;
+        }
+
+        .story {
+            padding-top: 10px;
+            background: #e6e6e6;
+        }
+
+        .story .search {
+            padding: 10px 10px;
+            padding-right: 35px;
+            position: relative;
+        }
+
+        .story .tupian {
+            display: inline-flex;
+            padding: 0px 10px;
+        }
+
+        .story .tupian-item {
+            width: 50%;
+            height: 145px;
+            position: relative;
+            bottom: 10px;
+        }
+
+        .story .tupian-item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play {
+            padding: 5px;
+            background: white;
+        }
+
+        .playing {
+            position: fixed;
+            bottom: 50px;
+            height: 76px;
+            padding-top: 1px;
+            background-color: #ffffff;
+            width: 100%;
+            border-top: solid 1px #eee;
+        }
+
+        .mui-table-view:before {
+            background-color: white !important;
+        }
+
+        .story_tell {
+            margin-bottom: 2px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #FFFFFF;
+            line-height: 20px;
+            position: relative;
+        }
+
+        .story_tell p {
+            font-size: 18px !important;
+            color: black !important;
+        }
+
+        input[type=search] {
+            border: 1px solid #ebebeb;
+            height: 30px;
+            border-radius: 10px;
+            outline: none;
+            background-color: aliceblue;
+        }
+
+        .message {
+            margin: 5px;
+            color: black;
+        }
+
+
+        .msg-item {
+            border-radius: 20px;
+            margin-bottom: 5px;
+        }
+
+        .message p {
+            color: black !important;
+        }
+
+        .message .left {
+            display: flex;
+            padding: 5px;
+        }
+
+        .message .left p {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message .image {
+            width: 15%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .message .image img {
+            width: 60px;
+            border-radius: 50%;
+            height: 60px;
+        }
+
+        .message .chat {
+            width: 85%;
+            height: 100%;
+        }
+
+        .message .right {
+            display: flex;
+        }
+
+        .message .right p {
+            padding: 10px;
+            border-radius: 10px;
+            background: lawngreen;
+        }
+
+        .sendMsg {
+            height: 60px;
+            background: whitesmoke;
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+            bottom: 50px;
+            display: flex;
+            padding: 0px 5px;
+        }
+
+        .sendMsg .send {
+            width: 20%;
+            height: 60px;
+            line-height: 60px;
+            background: whitesmoke;
+        }
+
+        .sendMsg .input {
+            background: whitesmoke;
+            width: 80%;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .mui-table-view .mui-media-object {
+            line-height: 100px;
+            max-width: 100px;
+            height: 80px;
+        }
+
+        .gonggao {
+            background: white;
+            height: 30px;
+            display: flex;
+        }
+
+        .search1 {
+            background: #E8E8E8;
+            padding: 5px;
+        }
+
+        .xingqu {
+            padding: 10px;
+            background: white;
+            margin-bottom: 5px;
+        }
+
+        .contentlist {
+            margin-bottom: 5px;
+            background: white;
+        }
+
+        .contentlist {
+            display: flex;
+        }
+
+        .contentlist-item {
+            padding: 10px;
+        }
+
+        .contentlist-item p {
+            position: relative;
+            top: 6px;
+        }
+
+        #robotContent img {
+            position: relative;
+            top: 5px;
+        }
+
+        .mui-title {
+            color: white !important;
+        }
+
+        .mui-bar-tab .mui-tab-item.mui-active {
+            color: #60C3FA !important;
+        }
+
+        .mui-content {
+            background: #E8E8E8 !important;
+        }
+
+        .mui-bar-nav {
+            top: 0;
+            -webkit-box-shadow: 0 1px 6px #ccc;
+            box-shadow: 0 0px 0px #ccc;
+        }
+    </style>
+</head>
+
+<body style="background: #E8E8E8">
+
+<header class="mui-bar mui-bar-nav" style="background: #60C3FA!important;">
+    <h1 class="mui-title">社区资讯</h1>
+</header>
+
+<nav class="mui-bar mui-bar-tab">
+    <a onclick="changeTitle('社区')" class="mui-tab-item mui-active" href="#shequ">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">社区</span>
+    </a>
+    <a onclick="changeTitle('咨询')" class="mui-tab-item " href="#tabbar-with-chat">
+        <span class="mui-icon mui-icon-qq"></span>
+        <span class="mui-tab-label">咨询</span>
+    </a>
+    <a onclick="changeTitle('训练')" class="mui-tab-item " href="#tabbar-with-contact">
+        <span class="mui-icon mui-icon mui-icon-micoff"></span>
+        <span class="mui-tab-label">训练</span>
+    </a>
+    <a onclick="changeTitle('我的')" class="mui-tab-item" href="#tabbar-with-map">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的</span>
+    </a>
+</nav>
+<div class="mui-content" id="app">
+    <div id="shequ" class="mui-control-content mui-active">
+        <div class="gonggao">
+            <diV style="display: flex;width: 90%;">
+                <div style="width: 10%;padding:5px;"><img style="width: 100%;height: 100%;" src="images/ls.jpg" alt="">
+                </div>
+                <div style="width: 90%;"><p
+                        style="font-size: 12px;height: 30px;line-height: 30px;color: black;padding-left: 20px;">
+                    5月29号重磅升级</p></div>
+            </diV>
+            <diV style="width: 10%;text-align: right;padding: 5px;">
+                <img style="width: 100%;height: 100%;" src="images/sc.jpg" alt="">
+            </diV>
+        </div>
+
+        <div class="search1" style="position: relative;padding-right: 23px;">
+            <div class="ssitem" style="position: relative;top: 7px;">
+                <input type="search" style="background: white;width: 100%;">
+            </div>
+            <img src="images/search.jpg" alt=""
+                 style="position: absolute;width: 10px;height: 20px;left: 15px;top: 17px;">
+            <img src="images/ht.jpg" alt="" style="position: absolute;width: 15px;height: 27px;right: 5px;top: 14px;">
+        </div>
+
+        <div class="xingqu">
+            <img src="images/xingqu.jpg" style="width: 100%;" alt="">
+        </div>
+
+        <div class="duodongzheng" style="padding: 5px;background: white;margin-bottom: 5px;">
+            <img src="images/duodongzheng.jpg" style="width: 100%;" alt="">
+        </div>
+
+<!--        <div @click="toDetail(item.id)" class="contentlist" v-for="(item,index) in newsList" :key="index">-->
+<!--            <div class="contentlist-item"-->
+<!--                 style="width: 15%;display: flex;flex-direction: row;align-items: center;justify-content: center;">-->
+<!--                <img :src="getUrl(item.img)" style="width: 50px;height: 50px;border-radius: 50%;" alt="">-->
+<!--            </div>-->
+<!--            <div class="contentlist-item" style="width: 55%;">-->
+<!--                <p class='mui-ellipsis' style="font-size: 15px;color: #86D2FD;">{{item.title}}</p>-->
+<!--                <p class='mui-ellipsis' style="color: black;">{{item.describle}}</p>-->
+<!--            </div>-->
+<!--            <div class="contentlist-item"-->
+<!--                 style="width: 30%;flex-direction: row;align-items: center;justify-content: center;display: flex;">-->
+<!--                <p style="color: black;font-weight: bold;text-align: center;margin-right: 10px;">100 <br><img-->
+<!--                        src="images/dz1.png" style="width: 15px;height: 15px;" alt=""></p>-->
+<!--                <p style="color: black;font-weight: bold;text-align: center;">150 <br><img src="images/gz1.png"-->
+<!--                                                                                           style="width: 15px;height: 15px;"-->
+<!--                                                                                           alt=""></p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div @click="toDetail(item.id)" class="contentlist" >
+            <div class="contentlist-item"
+                 style="width: 15%;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                <img src="images/link.png" style="width: 50px;height: 50px;border-radius: 50%;" alt="">
+            </div>
+            <div class="contentlist-item" style="width: 55%;">
+                <p class='mui-ellipsis' style="font-size: 15px;color: #86D2FD;">XXX</p>
+                <p class='mui-ellipsis' style="color: black;">XXX医院怎么样</p>
+            </div>
+            <div class="contentlist-item"
+                 style="width: 30%;flex-direction: row;align-items: center;justify-content: center;display: flex;">
+                <p style="color: black;font-weight: bold;text-align: center;margin-right: 10px;">55 <br><img
+                        src="images/dz1.png" style="width: 15px;height: 15px;" alt=""></p>
+                <p style="color: black;font-weight: bold;text-align: center;">151 <br><img src="images/gz1.png"
+                                                                                           style="width: 15px;height: 15px;"
+                                                                                           alt=""></p>
+            </div>
+        </div>
+
+        <div @click="toDetail(item.id)" class="contentlist" >
+            <div class="contentlist-item"
+                 style="width: 15%;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                <img src="images/link2.png" style="width: 50px;height: 50px;border-radius: 50%;" alt="">
+            </div>
+            <div class="contentlist-item" style="width: 55%;">
+                <p class='mui-ellipsis' style="font-size: 15px;color: #86D2FD;">XXX</p>
+                <p class='mui-ellipsis' style="color: black;">北京探院：XXX医院</p>
+            </div>
+            <div class="contentlist-item"
+                 style="width: 30%;flex-direction: row;align-items: center;justify-content: center;display: flex;">
+                <p style="color: black;font-weight: bold;text-align: center;margin-right: 10px;">55 <br><img
+                        src="images/dz1.png" style="width: 15px;height: 15px;" alt=""></p>
+                <p style="color: black;font-weight: bold;text-align: center;">151 <br><img src="images/gz1.png"
+                                                                                           style="width: 15px;height: 15px;"
+                                                                                           alt=""></p>
+            </div>
+        </div>
+
+    </div>
+    <div id="tabbar-with-chat" class="mui-control-content">
+        <div class="robot" style="padding: 30px 10px;">
+            <div class="img" @click="showRobot(1)">
+                <img src="images/znjqr.jpg" alt="" style="width: 100%;margin-bottom: 20px;">
+            </div>
+            <div class="img" @click="showRobot(2)">
+                <img src="images/rgkf.jpg" alt="" style="width: 100%;">
+            </div>
+        </div>
+        <div id="robot" style="display: none">
+            <div class="message">
+                <div class="msg-item left">
+                    <div class="item image">
+                        <img src="images/robot.jpg">
+                    </div>
+                    <div class="item chat" style="padding-top: 15px;padding-left: 20px;">
+                        <p id="robotContent"
+                           style="padding: 10px;background: white;font-size: 16px;border-radius: 10px;display: inline-block;width: 80%;"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="sendMsg">
+                <div class="input">
+                    <input id="message" style="background: white;border-radius: 0px;border: none;" type="search"
+                           placeholder="想对TA说什么.....">
+                </div>
+                <div class="send">
+                    <button id="sendMsg" style="width: 100%;height: 30px;position: relative;top: 15px;border: none;">发送
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="tabbar-with-contact" class="mui-control-content">
+
+        <div id="story" style="padding: 30px 10px;">
+            <div class="img" @click="showGame()">
+                <img src="images/wyx.jpg" alt="" style="width: 100%;margin-bottom: 20px;">
+            </div>
+            <div class="img" @click="showStory()">
+                <img src="images/tgs.jpg" alt="" style="width: 100%;margin-bottom: 20px;">
+            </div>
+            <div class="img" @click="showStory()">
+                <img src="images/ksp.jpg" alt="" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div id="tabbar-with-map" class="mui-control-content">
+        <!--        <div class="title" style="margin: 0px;padding: 35px;background: white;text-align: center;">-->
+        <!--            <img src="images/muwu.jpg" style="width: 100px;height:100px;border-radius: 50%">-->
+        <!--        </div>-->
+        <!--        <p id="loginNickName" style="text-align: center;position: relative;bottom: 30px;"></p>-->
+        <!--        <ul class="mui-table-view">-->
+        <!--            <hr style="border: solid 1px white;">-->
+        <!--            <li class="mui-table-view-cell" @click="attention()">-->
+        <!--                <a class="mui-navigate-right">-->
+        <!--                    我的关注-->
+        <!--                </a>-->
+        <!--            </li>-->
+        <!--            <li class="mui-table-view-cell" @click="primary()">-->
+        <!--                <a class="mui-navigate-right">-->
+        <!--                    我的点赞-->
+        <!--                </a>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+        <!--        <ul id="isLogin" class="mui-table-view" style="margin-top: 25px;display: none;">-->
+        <!--            <li class="mui-table-view-cell">-->
+        <!--                <a style="text-align: center;color: #007aff;" @click="logout()">-->
+        <!--                    退出登录-->
+        <!--                </a>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+
+        <div class="top" style="background: #60C3FA!important;height: 200px;">
+            <div style="padding: 10px 20px;display: flex;">
+                <div style="width: 20%">
+                    <img src="images/muwu.jpg" style="height: 50px;width: 50px;border-radius: 50%;" alt="">
+                </div>
+                <div style="width: 80%;display: flex;">
+                    <div style="width: 35%">
+                        <p style="font-size: 16px;font-weight: bold;color: white;">gochr</p>
+                        <p style="display: inline-block;padding: 0px 15px;background: #5E9BFE;color: white;border-radius: 20px;">
+                            Lv.5</p>
+                    </div>
+                    <div>
+                        <img src="images/jianji.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 10px 20px;display: flex;padding-left: 40px;position: relative;bottom: 10px;">
+                <div style="margin-right: 45px;">
+                    <p style="margin: 0px;color: white;font-size: 16px;">8</p>
+                    <p style="margin: 0px;color: white;font-size: 16px;">关注</p>
+                </div>
+                <div style="margin-right: 45px;">
+                    <p style="margin: 0px;color: white;font-size: 16px;">6</p>
+                    <p style="margin: 0px;color: white;font-size: 16px;">粉丝</p>
+                </div>
+                <div style="margin-right: 45px;">
+                    <p style="margin: 0px;color: white;font-size: 16px;">82</p>
+                    <p style="margin: 0px;color: white;font-size: 16px;">访客</p>
+                </div>
+            </div>
+            <div style="padding: 0px 20px;margin-bottom: 10px;">
+                <div style="background: white;border-radius: 5px;display: flex;flex-direction: row;align-items: center;justify-content: center;padding-top: 10px;">
+                    <div style="padding: 0px 15px;">
+                        <img src="images/dp.png" style="width: 35px;height: 30px;" alt="">
+                        <p style="text-align: center;">提问</p>
+                    </div>
+                    <div style="padding: 0px 15px;">
+                        <img src="images/wz.png" style="width: 35px;height: 30px;" alt="">
+                        <p style="text-align: center;">文章</p>
+                    </div>
+                    <div style="padding: 0px 15px;">
+                        <img src="images/bc.png" style="width: 35px;height: 30px;" alt="">
+                        <p style="text-align: center;">帖子</p>
+                    </div>
+                    <div style="padding: 0px 15px;">
+                        <img src="images/tj.png" style="width: 35px;height: 30px;" alt="">
+                        <p style="text-align: center;">数据</p>
+                    </div>
+                    <div style="padding: 0px 15px;">
+                        <img src="images/hy.png" style="width: 35px;height: 30px;" alt="">
+                        <p style="text-align: center;">会员</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 0px 20px;margin-bottom: 10px;">
+                <div style="height: 60px;background: white;display: flex;align-items: center;justify-content: center;">
+                    <label style="color: #B5B5B5;font-weight: 500;">关注栏目</label>
+                </div>
+            </div>
+
+            <div style="padding: 0px 20px;margin-bottom: 10px;">
+                <div style="height: 60px;background: white;display: flex;align-items: center;justify-content: center;">
+                    <label style="color: #B5B5B5;font-weight: 500;">关注问题</label>
+                </div>
+            </div>
+
+            <div style="padding: 0px 20px;margin-bottom: 10px;">
+                <div style="height: 60px;background: white;display: flex;align-items: center;justify-content: center;">
+                    <label style="color: #B5B5B5;font-weight: 500;">收藏文章</label>
+                </div>
+            </div>
+
+            <div style="padding: 0px 20px;margin-bottom: 10px;">
+                <div style="height: 60px;background: white;display: flex;align-items: center;justify-content: center;">
+                    <label style="color: #B5B5B5;font-weight: 500;">收藏帖子</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+<script src="js/mui.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+
+    function changeTitle(title) {
+        $(".mui-title").html(title)
+    }
+
+    let user = localStorage.getItem("qianTaiUser")
+    if (user) {
+        user = JSON.parse(user)
+        $("#loginNickName").html(user.nickname)
+        $("#isLogin").show()
+    }
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            newsList: [1,2,3,4,5],
+            limit: 5,
+            page: 1,
+            type: '',
+            total: 0
+        },
+        created() {
+            // this.loadData()
+        },
+        methods: {
+            showStory() {
+                window.location.href = 'story.html'
+            },
+            showGame() {
+                window.location.href = 'game.html'
+            },
+            showRobot(type) {
+                if (type == 1) {
+                    $("#robotContent").html("您好,我是非常智能的AI机器人,有什么可以帮您?<img src='images/3.gif'><img src='images/3.gif'><img src='images/3.gif'>")
+                } else {
+                    $("#robotContent").html("您好,这里是人工客服代表,有什么可以帮您?<img src='images/3.gif'><img src='images/3.gif'><img src='images/3.gif'>")
+                }
+                $('#robot').show()
+                $(".robot").hide()
+            },
+            attention() {
+                if (!user) {
+                    window.location.href = "login.html"
+                } else {
+                    window.location.href = "attention.html"
+                }
+            },
+            primary() {
+                if (!user) {
+                    window.location.href = "login.html"
+                } else {
+                    window.location.href = "primary.html"
+                }
+            },
+            logout() {
+                localStorage.removeItem("qianTaiUser")
+                window.location.href = 'login.html'
+            },
+            loadData() {
+                let _this = this
+                $.get(app.serverUrl + "/t_community_news/getInfoListPage", {
+                    limit: _this.limit,
+                    page: _this.page
+                }, function (res) {
+                    let data = res.data
+                    if (_this.type == 'pull' && data.length > 0) {
+                        $.each(data, function (index, data) {
+                            console.log(data)
+                            _this.newsList.unshift(data)
+                        })
+                        _this.total = data.length
+                    } else if (_this.type == 'end' && data.length > 0) {
+                        $.each(data, function (val, data) {
+                            _this.newsList.push(data)
+                        })
+                        _this.total = data.length
+                    } else if (data.length > 0) {
+                        _this.newsList = data
+                        _this.total = data.length
+                    } else {
+                        _this.total = 0
+                    }
+                })
+            },
+            getUrl(url) {
+                return app.serverUrl + "/" + url
+            },
+            toDetail(id) {
+                window.location.href = 'detail.html?id=' + id
+            }
+        }
+
+    })
+</script>
+<script>
+
+    $("#sendMsg").click(function () {
+        const message = $("#message").val()
+        if (!message) {
+            alert("请不要发送空信息")
+            return
+        }
+        $(".message").append('<div class="msg-item right">\n' +
+            '                <div class="item chat" style="width: 85%;text-align: right;padding-right:10px;padding-top: 15px;">\n' +
+            '                    <p style="padding: 10px;background: lawngreen;font-size: 16px;border-radius: 10px;display: inline-block;">' + message + '</p>\n' +
+            '                </div>\n' +
+            '                <div class="item image" style="width: 15%;padding-right: 10px;">\n' +
+            '                    <img src="images/robot.jpg" style="position: relative;right: 10px;">\n' +
+            '                </div>\n' +
+            '            </div>')
+
+        $(".message").append('<div class="message">\n' +
+            '                <div class="msg-item left">\n' +
+            '                    <div class="item image">\n' +
+            '                        <img src="images/robot.jpg">\n' +
+            '                    </div>\n' +
+            '                    <div class="item chat" style="padding-top: 15px;padding-left: 20px;">\n' +
+            '                        <p id="robotContent"\n' +
+            '                           style="padding: 10px;background: white;font-size: 16px;border-radius: 10px;display: inline-block;width: 80%;">' + data[0].content + '</p>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>')
+
+        // $(".message").append('<div class="message">\n' +
+        //     '                <div class="msg-item left">\n' +
+        //     '                    <div class="item image">\n' +
+        //     '                        <img src="images/robot.jpg">\n' +
+        //     '                    </div>\n' +
+        //     '                    <div class="item chat" style="padding-top: 15px;padding-left: 20px;">\n' +
+        //     '                        <p id="robotContent"\n' +
+        //     '                           style="padding: 10px;background: white;font-size: 16px;border-radius: 10px;display: inline-block;width: 80%;">哈哈哈哈哈哈,这个问题我不太清楚</p>\n' +
+        //     '                    </div>\n' +
+        //     '                </div>\n' +
+        //     '            </div>')
+        // $.get(app.serverUrl + "/t_keys/getInfoListPage", {
+        //     key: message,
+        //     page: 1,
+        //     limit: 1
+        // }, function (res) {
+        //     let data = res.data;
+        //     if (data.length > 0) {
+        //         $(".message").append('<div class="message">\n' +
+        //             '                <div class="msg-item left">\n' +
+        //             '                    <div class="item image">\n' +
+        //             '                        <img src="images/robot.jpg">\n' +
+        //             '                    </div>\n' +
+        //             '                    <div class="item chat" style="padding-top: 15px;padding-left: 20px;">\n' +
+        //             '                        <p id="robotContent"\n' +
+        //             '                           style="padding: 10px;background: white;font-size: 16px;border-radius: 10px;display: inline-block;width: 80%;">' + data[0].content + '</p>\n' +
+        //             '                    </div>\n' +
+        //             '                </div>\n' +
+        //             '            </div>')
+        //     } else {
+        //         $(".message").append('<div class="message">\n' +
+        //             '                <div class="msg-item left">\n' +
+        //             '                    <div class="item image">\n' +
+        //             '                        <img src="images/robot.jpg">\n' +
+        //             '                    </div>\n' +
+        //             '                    <div class="item chat" style="padding-top: 15px;padding-left: 20px;">\n' +
+        //             '                        <p id="robotContent"\n' +
+        //             '                           style="padding: 10px;background: white;font-size: 16px;border-radius: 10px;display: inline-block;width: 80%;">智商有限,对不住了亲<img src="images/12.gif"><img src="images/12.gif"><img src="images/12.gif"></p>\n' +
+        //             '                    </div>\n' +
+        //             '                </div>\n' +
+        //             '            </div>')
+        //     }
+        // })
+        $("#message").val("")
+    })
+</script>
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+     * 下拉刷新具体业务实现
+     */
+    function pulldownRefresh() {
+        vue.page++
+        vue.type = 'pull'
+        vue.loadData()
+        setTimeout(function () {
+            // var table = document.body.querySelector('.mui-table-view');
+            // var cells = document.body.querySelectorAll('.mui-table-view-cell');
+            // for (var i = cells.length, len = i + 3; i < len; i++) {
+            //     var li = document.createElement('li');
+            //     li.className = 'mui-table-view-cell mui-media';
+            //     li.innerHTML = '<a href="javascript:;">\n' +
+            //         '<img class="mui-media-object mui-pull-left" src="images/muwu.jpg">\n' +
+            //         '<div class="mui-media-body">\n' +
+            //         '幸福\n' +
+            //         '<p class=\'mui-ellipsis\'>多动症家长，应该做的有什么？</p>\n' +
+            //         '</div>\n' +
+            //         '</a>';
+            //     //下拉刷新，新纪录插到最前面；
+            //     table.insertBefore(li, table.firstChild);
+            // }
+            mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+        }, 500);
+    }
+
+    var count = 0;
+
+    /**
+     * 上拉加载具体业务实现
+     */
+    function pullupRefresh() {
+        vue.page++
+        vue.type = 'end'
+        vue.loadData()
+        console.log(vue.total)
+        setTimeout(function () {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((vue.total == 0)); //参数为true代表没有更多数据了。
+            // var table = document.body.querySelector('.mui-table-view');
+            // var cells = document.body.querySelectorAll('.mui-table-view-cell');
+            // for (var i = cells.length, len = i + 5; i < len; i++) {
+            //     var li = document.createElement('li');
+            //     li.className = 'mui-table-view-cell mui-media';
+            //     li.innerHTML = '<a href="javascript:;">\n' +
+            //         '<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">\n' +
+            //         '<div class="mui-media-body">\n' +
+            //         '幸福\n' +
+            //         '<p class=\'mui-ellipsis\'>多动症家长，应该做的有什么？</p>\n' +
+            //         '</div>\n' +
+            //         '</a>';
+            //     table.appendChild(li);
+            // }
+        }, 500);
+    }
+</script>
+</html>

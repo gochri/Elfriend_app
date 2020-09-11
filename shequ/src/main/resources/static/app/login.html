@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <style type="text/css">
+        .mui-btn {
+            width: 80px;
+        }
+
+        .tag {
+            height: 200px;
+            background: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .tag img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        .mui-input-row {
+            height: 60px !important;
+            padding-top: 10px;
+        }
+
+        .mui-btn {
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">登录</h1>
+</header>
+<div class="mui-content">
+    <div class="tag">
+        <img src="images/muwu.jpg">
+    </div>
+    <form class="mui-input-group">
+        <div class="mui-input-row">
+            <label>帐号</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入帐号名" id="username">
+        </div>
+        <div class="mui-input-row">
+            <label>密码</label>
+            <input type="password" class="mui-input-clear" placeholder="请输入密码" id="password">
+        </div>
+    </form>
+    <div class="mui-content-padded" align="center">
+        <button type="button" class="mui-btn mui-btn-blue" id="login">登陆</button>
+        <button type="button" class="mui-btn mui-btn-green" id="reg">注册</button>
+    </div>
+</div>
+
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $("#reg").click(function (res) {
+        window.location.href = 'register.html'
+    })
+
+    $("#login").click(function () {
+        let username = $("#username").val()
+        let password = $("#password").val()
+        if (!username) {
+            alert("请输入账号")
+            return
+        }
+        if (!password) {
+            alert("请输入密码")
+            return;
+        }
+        $.post(app.serverUrl + "/t_user/login", {
+            username: username,
+            password: password
+        }, function (res) {
+            if (res.code == 0) {
+                localStorage.setItem("qianTaiUser", JSON.stringify(res.data))
+                window.location.href = "index.html"
+            } else {
+                alert(res.msg)
+            }
+        })
+    })
+</script>
+</body>
+</html>

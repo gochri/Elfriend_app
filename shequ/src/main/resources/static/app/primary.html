@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>社区资讯</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        .title {
+            margin: 20px 15px 10px;
+            color: #6d6d72;
+            font-size: 15px;
+        }
+
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 11px 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            margin: -11px 0;
+        }
+
+        .oa-contact-avatar {
+            width: 75px;
+        }
+
+        .oa-contact-avatar img {
+            border-radius: 50%;
+        }
+
+        .oa-contact-content {
+            width: 100%;
+        }
+
+        .oa-contact-name {
+            margin-right: 20px;
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        .mui-scroll {
+            position: relative !important;
+        }
+
+        .mui-bar {
+            background-color: white !important;
+        }
+
+        .story {
+            padding-top: 10px;
+            background: #e6e6e6;
+        }
+
+        .story .search {
+            padding: 10px 10px;
+            padding-right: 35px;
+            position: relative;
+        }
+
+        .story .tupian {
+            display: inline-flex;
+            padding: 0px 10px;
+        }
+
+        .story .tupian-item {
+            width: 50%;
+            height: 145px;
+            position: relative;
+            bottom: 10px;
+        }
+
+        .story .tupian-item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play {
+            padding: 5px;
+            background: white;
+        }
+
+        .playing {
+            position: fixed;
+            bottom: 50px;
+            height: 76px;
+            padding-top: 1px;
+            background-color: #ffffff;
+            width: 100%;
+            border-top: solid 1px #eee;
+        }
+
+        .mui-table-view:before {
+            background-color: white !important;
+        }
+
+        .story_tell {
+            margin-bottom: 2px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #FFFFFF;
+            line-height: 20px;
+            position: relative;
+        }
+
+        .story_tell p {
+            font-size: 18px !important;
+            color: black !important;
+        }
+
+        input[type=search] {
+            border: 1px solid #ebebeb;
+            height: 44px;
+            border-radius: 10px;
+            outline: none;
+            background-color: aliceblue;
+        }
+
+        .message {
+            margin: 5px;
+            color: black;
+        }
+
+
+        .msg-item {
+            border-radius: 20px;
+            margin-bottom: 5px;
+        }
+
+        .message p {
+            color: black !important;
+        }
+
+        .message .left {
+            display: flex;
+            padding: 5px;
+        }
+
+        .message .left p {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message .image {
+            width: 15%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .message .image img {
+            width: 30px;
+            border-radius: 50%;
+            height: 30px;
+        }
+
+        .message .chat {
+            width: 85%;
+            height: 100%;
+        }
+
+        .message .right {
+            display: flex;
+        }
+
+        .message .right p {
+            padding: 10px;
+            border-radius: 10px;
+            background: lawngreen;
+        }
+
+        .sendMsg {
+            height: 60px;
+            background: whitesmoke;
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+            bottom: 50px;
+            display: flex;
+            padding: 0px 5px;
+        }
+
+        .sendMsg .send {
+            width: 20%;
+            height: 60px;
+            line-height: 60px;
+            background: whitesmoke;
+        }
+
+        .sendMsg .input {
+            background: whitesmoke;
+            width: 80%;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .mui-table-view .mui-media-object {
+            line-height: 100px;
+            max-width: 100px;
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">我的点赞</h1>
+</header>
+<div class="mui-content" id="app">
+    <div id="pullrefresh" class="mui-control-content mui-active">
+        <div class="mui-scroll">
+            <ul class="mui-table-view">
+                <li @click="toDetail(item.id)" class="mui-table-view-cell mui-media" v-for="(item,index) in newsList"
+                    :key="index">
+                    <a href="#">
+                        <img class="mui-media-object mui-pull-right" :src="getUrl(item.img)">
+                        <div class="mui-media-body">
+                            {{item.title}}
+                            <p class='mui-ellipsis'>{{item.describle}}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/mui.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    mui.init({})
+    let user = localStorage.getItem("qianTaiUser")
+    if (user) {
+        user = JSON.parse(user)
+        $("#loginNickName").html(user.nickname)
+        $("#isLogin").show()
+    }
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            newsList: [],
+            limit: 5,
+            page: 1,
+            type: '',
+            total: 0
+        },
+        created() {
+            this.loadData()
+        },
+        methods: {
+            attention() {
+                if (!user) {
+                    window.location.href = "login.html"
+                }
+            },
+            primary() {
+                if (!user) {
+                    window.location.href = "login.html"
+                }
+            },
+            logout() {
+                localStorage.removeItem("qianTaiUser")
+                window.location.href = 'login.html'
+            },
+            loadData() {
+                let _this = this
+                $.get(app.serverUrl + "/t_community_news/myPrimary", {
+                    userid: user.id
+                }, function (res) {
+                    let data = res.data
+                    _this.newsList = data
+                })
+            },
+            getUrl(url) {
+                return app.serverUrl + "/" + url
+            },
+            toDetail(id) {
+                window.location.href = 'detail.html?id=' + id
+            }
+        }
+
+    })
+</script>
+</html>
